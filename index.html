@@ -1,40 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset = "UTF-8">
-        <meta name="viewport" content = "width = device-width, initial-scale = 1.0">
-        <title> Weather Dashboard</title>
-        <link rel="stylesheet" href = "style.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Weather Dashboard</title>
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <div class ="container">
+        <input type="text" id="city-input" placeholder="Enter city name">
+            <button id="search-button">Search</button>
+        <select id = "country-select">
+            <option value = "Copenhagen">Copenhagen</option>
+            <option value = "London">London</option>
+            <option value = "Berlin">Berlin</option>
+            <option value = "Tokyo">Tokyo</option>
+            <option value = "New York">New York</option>
+            <option value = "Paris">Paris</option>
+            <option value = "Moscow">Moscow</option>
+            <option value = "Madrid">Madrid</option>
+            <option value = "Rome">Rome</option>
+            <option value = "Athens">Athens</option>
+            <option value = "Sydney">Sydney</option>
+            <option value = "Beijing">Beijing</option>
+            <option value = "Cairo">Cairo</option>
+            <option value = "Dubai">Dubai</option>
+            <option value = "Istanbul">Istanbul</option>
+            <option value = "Mumbai">Mumbai</option>
+            <option value = "Bangkok">Bangkok</option>
+            <option value = "Singapore">Singapore</option>
+            <option value = "Kuala Lumpur">Kuala Lumpur</option>
+            <option value = "Jakarta">Jakarta</option>
+            <option value = "Fredensborg">Fredensborg</option>
+        </select>
+        <div class="container">
             <h1>Weather Dashboard</h1>
-            <select id = "country-select">
-                <option value = "Copenhagen">Copenhagen</option>
-                <option value = "London">London</option>
-                <option value = "Berlin">Berlin</option>
-                <option value = "Tokyo">Tokyo</option>
-                <option value = "New York">New York</option>
-                <option value = "Paris">Paris</option>
-                <option value = "Moscow">Moscow</option>
-                <option value = "Madrid">Madrid</option>
-                <option value = "Rome">Rome</option>
-                <option value = "Athens">Athens</option>
-                <option value = "Sydney">Sydney</option>
-                <option value = "Beijing">Beijing</option>
-                <option value = "Cairo">Cairo</option>
-                <option value = "Dubai">Dubai</option>
-                <option value = "Istanbul">Istanbul</option>
-                <option value = "Mumbai">Mumbai</option>
-                <option value = "Bangkok">Bangkok</option>
-                <option value = "Singapore">Singapore</option>
-                <option value = "Kuala Lumpur">Kuala Lumpur</option>
-                <option value = "Jakarta">Jakarta</option>
-            </select>
-            <div id ="weather-info">
+            <div id="weather-info">
                 <p>Loading weather data...</p>
             </div>
         </div>
-        <script src = "app.js"></script>
+        
+        <script src="app.js"></script>
     </body>
 </html>
