@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
         fetchWeatherData(select.value);
     }
 
-    
+    // Periodically update weather data every 10 minutes (600000 milliseconds)
     setInterval(() => {
         if (currentCity) {
             fetchWeatherData(currentCity);
@@ -100,10 +100,44 @@ function updateWeatherInfo(data) {
         <p>Weather: ${data.weather[0].description}</p>
         <p>Wind: ${wind} m/s, ${winddirection}</p>
     `;
+
+    // Debugging:
+    console.log('Weather condition:', data.weather[0].main);
+
+
+    if (data.weather[0].main.toLowerCase().includes('rain')) {
+        console.log('Adding rain animation');
+        addRainAnimation();
+    } else {
+        console.log('Removing rain animation');
+        removeRainAnimation();
+    }
 }
 
 function computewinddir(winddirection) {
     const directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
     const index = Math.round(winddirection / 45) % 8;
     return directions[index];
+}
+
+function addRainAnimation() {
+    if (!document.querySelector('.rain')) {
+        const rainContainer = document.createElement('div');
+        rainContainer.classList.add('rain');
+        for (let i = 0; i < 100; i++) {
+            const drop = document.createElement('div');
+            drop.classList.add('drop');
+            drop.style.left = `${Math.random() * 100}%`;
+            drop.style.animationDelay = `${Math.random() * 0.5}s`;
+            rainContainer.appendChild(drop);
+        }
+        document.body.appendChild(rainContainer);
+    }
+}
+
+function removeRainAnimation() {
+    const rainContainer = document.querySelector('.rain');
+    if (rainContainer) {
+        rainContainer.remove();
+    }
 }
