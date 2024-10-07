@@ -93,24 +93,41 @@ function updateWeatherInfo(data) {
     const wind = data.wind.speed;
     const winddirection = computewinddir(data.wind.deg);
     const tempCelsius = (data.main.temp - 273.15).toFixed(2);
+    const humidity = data.main.humidity;
+    const pressure = data.main.pressure;
+    const visibility = (data.visibility / 1000).toFixed(2); // Convert to km
 
     weatherInfo.innerHTML = `
         <h2>Weather in ${data.name}</h2>
         <p>Temperature: ${tempCelsius}°C</p>
         <p>Weather: ${data.weather[0].description}</p>
         <p>Wind: ${wind} m/s, ${winddirection}</p>
+        <p>Humidity: ${humidity}%</p>
+        <p>Pressure: ${pressure} hPa</p>
+        <p>Visibility: ${visibility} km</p>
     `;
 
-    // Debugging:
-    console.log('Weather condition:', data.weather[0].main);
+    const weatherCondition = data.weather[0].main.toLowerCase();
+    const isDayTime = data.dt > data.sys.sunrise && data.dt < data.sys.sunset;
 
-
-    if (data.weather[0].main.toLowerCase().includes('rain')) {
-        console.log('Adding rain animation');
-        addRainAnimation();
-    } else {
-        console.log('Removing rain animation');
-        removeRainAnimation();
+    if (weatherCondition.includes('rain')) {
+        if (isDayTime) {
+            addRainyDayAnimation();
+        } else {
+            addRainyNightAnimation();
+        }
+    } else if (weatherCondition.includes('clouds')) {
+        if (isDayTime) {
+            addCloudyDayAnimation();
+        } else {
+            addCloudyNightAnimation();
+        }
+    } else if (weatherCondition.includes('clear')) {
+        if (isDayTime) {
+            addClearDayAnimation();
+        } else {
+            addClearNightAnimation();
+        }
     }
 }
 
@@ -135,9 +152,42 @@ function addRainAnimation() {
     }
 }
 
-function removeRainAnimation() {
+function addRainyDayAnimation() {
+    removeWeatherAnimations();
+    addRainAnimation();
+    document.body.classList.add('rainy-day');
+}
+
+function addRainyNightAnimation() {
+    removeWeatherAnimations();
+    addRainAnimation();
+    document.body.classList.add('rainy-night');
+}
+
+function addCloudyDayAnimation() {
+    removeWeatherAnimations();
+    document.body.classList.add('cloudy-day');
+}
+
+function addCloudyNightAnimation() {
+    removeWeatherAnimations();
+    document.body.classList.add('cloudy-night');
+}
+
+function addClearDayAnimation() {
+    removeWeatherAnimations();
+    document.body.classList.add('clear-day');
+}
+
+function addClearNightAnimation() {
+    removeWeatherAnimations();
+    document.body.classList.add('clear-night');
+}
+
+function removeWeatherAnimations() {
     const rainContainer = document.querySelector('.rain');
     if (rainContainer) {
         rainContainer.remove();
     }
+    document.body.classList.remove('rainy-day', 'rainy-night', 'cloudy-day', 'cloudy-night', 'clear-day', 'clear-night');
 }
