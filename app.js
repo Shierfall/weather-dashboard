@@ -1,4 +1,4 @@
-const apikey = '600c75faaa393220e5051342519ac538';
+const apikey = config.API_KEY;
 let currentCity = '';
 
 document.getElementById('country-select').addEventListener('change', function() {
